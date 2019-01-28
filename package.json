@@ -1,5 +1,5 @@
 {
-  "name": "Canary",
+  "name": "canary",
   "version": "1.0.0",
   "description": "Opinionated NodeJS web service. Built on NestJS.",
   "author": "Bellwood Studios",
