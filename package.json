@@ -1,17 +1,16 @@
 {
-  "name": "canary",
-  "version": "1.0.0",
+  "name": "@bellwoodstudios/canary",
+  "version": "0.0.1",
   "description": "Opinionated NodeJS web service. Built on NestJS.",
-  "author": "Bellwood Studios",
+  "author": "Bellwood Studios <connect@bellwoodstudios.com> (https://www.bellwoodstudios.com)",
   "license": "MIT",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "prepare": "npm run build",
+    "build": "rimraf dist && tsc -p tsconfig.build.json && cp package.json README.md dist/ && cd src && rsync -R **/*.json ../dist/",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
     "start:debug": "nodemon --config nodemon-debug.json",
-    "prestart:prod": "rimraf dist && npm run build",
+    "prestart:prod": "npm run build",
     "start:prod": "node dist/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
@@ -25,6 +24,7 @@
     "@nestjs/core": "^5.4.0",
     "@nestjs/typeorm": "^5.2.2",
     "@types/convict": "^4.2.1",
+    "@types/glob": "^7.1.1",
     "convict": "^4.4.1",
     "glob": "^7.1.3",
     "mysql": "^2.16.0",
@@ -63,5 +63,9 @@
     },
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BellwoodStudios/canary.git"
   }
 }
