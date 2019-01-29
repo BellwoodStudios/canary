@@ -5,7 +5,7 @@
   "author": "Bellwood Studios <connect@bellwoodstudios.com> (https://www.bellwoodstudios.com)",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json && cp package.json README.md dist/ && cd src && rsync -R **/*.json ../dist/",
+    "build": "rimraf dist && tsc -p tsconfig.build.json && cp package.json README.md dist/ && cd src",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
