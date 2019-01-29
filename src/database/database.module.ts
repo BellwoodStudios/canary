@@ -1,17 +1,16 @@
 import { Module, DynamicModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from '../config/config.service';
-import { ConfigModule } from '../config/config.module';
 
-@Module({})
-export class DatabaseModule {
-
-	static async forRootAsync ():Promise<DynamicModule> {
-		return TypeOrmModule.forRootAsync({
-			imports: [ConfigModule],
+@Module({
+	imports: [
+		TypeOrmModule.forRootAsync({
 			useFactory: (configService:ConfigService) => configService.config.get('database'),
 			inject: [ConfigService],
-		});
-	}
-
-}
+		}),
+	],
+	exports: [
+		TypeOrmModule,
+	],
+})
+export class DatabaseModule {}

@@ -29,7 +29,7 @@ export class ConfigService {
 		const files:string[] = await globAsync(path);
 		for (const f of files) {
 			const name = basename(f).split('.')[0];
-			const data = await import(f);
+			const data = (await import(f)).default;
 			this.configDefinitions = Object.assign(this.configDefinitions, { [name]:data });
 		}
 	}
