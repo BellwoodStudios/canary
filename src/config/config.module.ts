@@ -5,7 +5,7 @@ import { ConfigService } from './config.service';
 @Module({})
 export class ConfigModule {
 
-	static async forRoot (paths:string[]):Promise<DynamicModule> {
+	static async forRootAsync (paths:string[]):Promise<DynamicModule> {
 		const config = new ConfigService();
 		await config.addConfigs(__dirname + '/../**/*.configdefs.js');
 		for (const p of paths) {

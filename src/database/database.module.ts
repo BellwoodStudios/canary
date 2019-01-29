@@ -6,7 +6,7 @@ import { ConfigModule } from '../config/config.module';
 @Module({})
 export class DatabaseModule {
 
-	static async forRoot ():Promise<DynamicModule> {
+	static async forRootAsync ():Promise<DynamicModule> {
 		return TypeOrmModule.forRootAsync({
 			imports: [ConfigModule],
 			useFactory: (configService:ConfigService) => configService.config.get('database'),
