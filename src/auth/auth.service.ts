@@ -13,10 +13,11 @@ export class AuthService {
 	) {}
 
 	/**
-	 * Log the current user in. This should only be called after authentication logic has completed successfully.
+	 * Generate a JWT from the provided token.
+	 * 
 	 * @param token The token to track the user.
 	 */
-	async signIn (token:string):Promise<string> {
+	async generateJwt (token:string):Promise<string> {
 		const payload:JwtPayload = { token };
 		return this.jwtService.sign(payload);
 	}
