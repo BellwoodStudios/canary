@@ -1,5 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Model } from '../database';
 
-export interface BaseUser {
-	getToken ():string;
+export abstract class BaseUser extends Model {
+
+	abstract getToken ():string;
+
 }
