@@ -35,6 +35,11 @@
     "whitespace": [
       false,
       "check-type"
+    ],
+    "no-trailing-whitespace": [
+      true,
+      "ignore-comments",
+      "ignore-blank-lines"
     ]
   },
   "rulesDirectory": []

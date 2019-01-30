@@ -2,7 +2,7 @@ import { Module, DynamicModule } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
-import { UserModule } from '../user/user.module';
+import { BaseUserModule } from '../baseuser/baseuser.module';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigService } from '../config/config.service';
 
@@ -21,7 +21,7 @@ import { ConfigService } from '../config/config.service';
 			},
 			inject: [ConfigService],
 		}),
-		UserModule,
+		BaseUserModule,
 	],
 	providers: [AuthService, JwtStrategy],
 	exports: [AuthService],
