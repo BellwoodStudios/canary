@@ -28,9 +28,14 @@ export class ConfigService {
 	async addConfigs (path:string) {
 		const files:string[] = await globAsync(path);
 		for (const f of files) {
-			const name = basename(f).split('.')[0];
+			let pieces = basename(f).split('.');
+			pieces = pieces.slice(0, pieces.length - 2).reverse();
 			const data = (await import(f)).default;
-			this.configDefinitions = Object.assign(this.configDefinitions, { [name]:data });
+			let obj = data;
+			for (const n of pieces) {
+				obj = { [n]:obj };
+			}
+			this.configDefinitions = Object.assign(this.configDefinitions, obj);
 		}
 	}
 

@@ -40,7 +40,8 @@
       true,
       "ignore-comments",
       "ignore-blank-lines"
-    ]
+    ],
+    "max-classes-per-file": [false, 1]
   },
   "rulesDirectory": []
 }

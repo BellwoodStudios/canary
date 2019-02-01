@@ -1,29 +1,28 @@
 import { JwtService } from '@nestjs/jwt';
-import { Injectable } from '@nestjs/common';
-import { BaseUserService } from '../baseuser/baseuser.service';
-import { JwtPayload } from './interfaces/jwt-payload.interface';
-import { BaseUser } from 'src/baseuser/baseuser.entity';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
+import { AuthJwtPayload } from './jwt';
+import { BaseUserService, BaseUser, APP_USER_SERVICE } from '../baseuser';
 
 @Injectable()
 export class AuthService {
 
 	constructor (
-		private readonly userService:BaseUserService<BaseUser>,
+		@Inject(forwardRef(() => APP_USER_SERVICE)) private readonly userService:BaseUserService<BaseUser>,
 		private readonly jwtService:JwtService,
 	) {}
 
 	/**
-	 * Generate a JWT from the provided token.
+	 * Generate a JWT from the provided identifier.
 	 * 
-	 * @param token The token to track the user.
+	 * @param identifier The identifier to track the user.
 	 */
-	async generateJwt (token:string):Promise<string> {
-		const payload:JwtPayload = { token };
+	async generateToken (identifier:string):Promise<string> {
+		const payload:AuthJwtPayload = { identifier };
 		return this.jwtService.sign(payload);
 	}
 
-	async validateUser (payload:JwtPayload):Promise<BaseUser> {
-		return await this.userService.getUserByToken(payload.token);
+	async validateUser (payload:AuthJwtPayload):Promise<BaseUser> {
+		return await this.userService.getUserByIdentifier(payload.identifier);
 	}
 
 }
