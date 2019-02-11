@@ -1,10 +1,11 @@
-import { Module, DynamicModule, Type, forwardRef } from '@nestjs/common';
+import { Module, DynamicModule, Type, forwardRef, Global } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { PassportModule } from '@nestjs/passport';
 import { AuthJwtStrategy } from './jwt';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '../config';
 
+@Global()
 @Module({})
 export class AuthModule {
 
@@ -25,8 +26,7 @@ export class AuthModule {
 					},
 					inject: [ConfigService],
 				}),
-				forwardRef(() => UserModule),
-				JwtModule,
+				UserModule,
 			],
 			providers: [
 				AuthJwtStrategy,

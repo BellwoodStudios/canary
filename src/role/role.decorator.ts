@@ -1,5 +1,4 @@
 import { ReflectMetadata } from '@nestjs/common';
-import { OwnedEntity, RoleEntity } from './role.interface';
 
 /**
  * Always allow the request.
@@ -20,8 +19,3 @@ export const AllowIfLoggedOut = () => ReflectMetadata('allowIfLoggedOut', [true]
  * Will only authorize the request if the current user has the provided role.
  */
 export const Role = (role:string) => ReflectMetadata('role', [role]);
-
-/**
- * Will only authorize the request if the current user is the owner of the provided entity.
- */
-export const Owner = (entity:OwnedEntity<RoleEntity>) => ReflectMetadata('owner', [entity]);

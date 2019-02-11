@@ -7,7 +7,7 @@ import { BaseUserService, BaseUser, APP_USER_SERVICE } from '../baseuser';
 export class AuthService {
 
 	constructor (
-		@Inject(forwardRef(() => APP_USER_SERVICE)) private readonly userService:BaseUserService<BaseUser>,
+		@Inject(APP_USER_SERVICE) private readonly userService:BaseUserService<BaseUser>,
 		private readonly jwtService:JwtService,
 	) {}
 
