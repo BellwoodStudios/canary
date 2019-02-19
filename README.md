@@ -9,6 +9,7 @@ Canary takes a bunch of common best practices from the NestJS docs and puts them
 * Passport - User authentication. Credentials are handled via the Authorization header via JSON Web Tokens.
 * GraphQL - GraphQL + Apollo Server.
 * TypeGraphQL - Generate GraphQL types from TypeORM.
+* class-transformer - Apply automatic JS object serialization.
 
 # Features
 
@@ -17,3 +18,4 @@ Canary takes a bunch of common best practices from the NestJS docs and puts them
 * Authentication
 * User Roles
 * GraphQL
+* Object Serialization
