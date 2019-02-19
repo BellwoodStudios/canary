@@ -19,14 +19,15 @@ export class RoleGuard extends AuthGuard('jwt') {
 			return true;
 		}
 
-		const role = this.reflector.get<string[]>('role', context.getHandler())[0];
+		const roles = this.reflector.get<string[]>('role', context.getHandler());
+		const role = roles != null ? roles[0] : null;
 		const alwaysAllow = this.reflector.get<boolean[]>('alwaysAllow', context.getHandler());
 		const allowIfLoggedIn = this.reflector.get<boolean[]>('allowIfLoggedIn', context.getHandler());
 		const allowIfLoggedOut = this.reflector.get<boolean[]>('allowIfLoggedOut', context.getHandler());
 		let isLoggedIn = false;
 		try {
 			isLoggedIn = (await super.canActivate(context)).valueOf() as boolean;
-		} catch {
+		} catch (err) {
 			isLoggedIn = false;
 		}
 

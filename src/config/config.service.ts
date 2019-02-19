@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import * as convict from 'convict';
-import * as glob from 'glob';
+import convict from 'convict';
+import glob from 'glob';
 import { readFile } from 'fs';
 import { basename } from 'path';
 import { promisify } from 'util';
