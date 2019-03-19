@@ -25,7 +25,7 @@ export default {
 			format: String,
 			default: '',
 		},
-		secretKet: {
+		secretKey: {
 			doc: 'Secret key for the s3 bucket.',
 			format: String,
 			default: '',
@@ -34,9 +34,9 @@ export default {
 	},
 	limits: {
 		fileSize: {
-			doc: 'The max file size (in bytes). 0 for unlimited.',
+			doc: 'The max file size (in bytes).',
 			format: 'int',
-			default: 0,
+			default: 10*1024*1024,
 		},
 	},
 };
