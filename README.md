@@ -10,6 +10,7 @@ Canary takes a bunch of common best practices from the NestJS docs and puts them
 * GraphQL - GraphQL + Apollo Server.
 * TypeGraphQL - Generate GraphQL types from TypeORM.
 * class-transformer - Apply automatic JS object serialization.
+* multer-s3 - Amazon S3 storage for file uploads.
 
 # Features
 
@@ -19,3 +20,4 @@ Canary takes a bunch of common best practices from the NestJS docs and puts them
 * User Roles
 * GraphQL
 * Object Serialization
+* S3 File Uploads
