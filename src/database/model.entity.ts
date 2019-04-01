@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Field, ID } from 'type-graphql';
+import { Field, ID, ObjectType } from 'type-graphql';
 
+@ObjectType()
 export abstract class Model {
 
 	@PrimaryGeneratedColumn()
