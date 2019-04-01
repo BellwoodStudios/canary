@@ -1,4 +1,5 @@
-import { Module, DynamicModule, Type, forwardRef, Global, MulterModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
+import { MulterModule } from '@nestjs/platform-express/multer';
 import { ConfigService } from '../config';
 import multer from 'multer';
 import multerS3 from 'multer-s3';
