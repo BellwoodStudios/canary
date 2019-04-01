@@ -1,6 +1,6 @@
 {
   "name": "@bellwoodstudios/canary",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Opinionated NodeJS web service. Built on NestJS.",
   "author": "Bellwood Studios <connect@bellwoodstudios.com> (https://www.bellwoodstudios.com)",
   "license": "MIT",
