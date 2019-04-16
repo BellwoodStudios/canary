@@ -8,10 +8,10 @@ import aws from 'aws-sdk';
 @Module({})
 export class UploadModule {
 
-	static registerAsync () {
+	static registerAsync (options:any = {}) {
 		return MulterModule.registerAsync({
 			useFactory: async (configService:ConfigService) => {
-				const cfg = configService.config.get('upload');
+				const cfg = Object.assign(options, configService.config.get('upload'));
 				let storage = null;
 				switch (cfg.storage.type) {
 					case 'memory': storage = multer.memoryStorage(); break;
