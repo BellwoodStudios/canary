@@ -14,4 +14,9 @@ export default {
 		format: String,
 		default: 'src/schema.gql',
 	},
+	installSubscriptionHandlers: {
+		doc: 'Enable subscriptions.',
+		format: Boolean,
+		default: true,
+	},
 };
