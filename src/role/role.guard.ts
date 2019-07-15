@@ -3,6 +3,8 @@ import { Reflector } from '@nestjs/core';
 import { RoleEntity } from './role.interface';
 import { ConfigService } from '../config';
 import { AuthGuard } from '@nestjs/passport';
+import { Ctx } from 'type-graphql';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
 @Injectable()
 export class RoleGuard extends AuthGuard('jwt') {
@@ -14,16 +16,28 @@ export class RoleGuard extends AuthGuard('jwt') {
 		super();
 	}
 
+	getRequest (context:ExecutionContext) {
+		try {
+			const ctx = GqlExecutionContext.create(context);
+			return ctx.getContext().req;
+		} catch (ex) {
+			return context.switchToHttp().getRequest();
+		}
+	}
+
 	async canActivate (context:ExecutionContext):Promise<boolean> {
 		if (this.configService.config.get('role').strategy === 'allowAll') {
 			return true;
 		}
 
-		const roles = this.reflector.get<string[]>('role', context.getHandler());
+		const handler = context.getHandler();
+		const request = this.getRequest(context);
+
+		const roles = this.reflector.get<string[]>('role', handler);
 		const role = roles != null ? roles[0] : null;
-		const alwaysAllow = this.reflector.get<boolean[]>('alwaysAllow', context.getHandler());
-		const allowIfLoggedIn = this.reflector.get<boolean[]>('allowIfLoggedIn', context.getHandler());
-		const allowIfLoggedOut = this.reflector.get<boolean[]>('allowIfLoggedOut', context.getHandler());
+		const alwaysAllow = this.reflector.get<boolean[]>('alwaysAllow', handler);
+		const allowIfLoggedIn = this.reflector.get<boolean[]>('allowIfLoggedIn', handler);
+		const allowIfLoggedOut = this.reflector.get<boolean[]>('allowIfLoggedOut', handler);
 		let isLoggedIn = false;
 		try {
 			isLoggedIn = (await super.canActivate(context)).valueOf() as boolean;
@@ -37,7 +51,6 @@ export class RoleGuard extends AuthGuard('jwt') {
 		}
 
 		// Next see if we are logged in or not
-		const request = context.switchToHttp().getRequest();
 		if (isLoggedIn) {
 			const user:RoleEntity = request.user;
 			if (allowIfLoggedIn) {

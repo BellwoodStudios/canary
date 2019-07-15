@@ -7,7 +7,12 @@ export class GraphQLModule {
 
 	static forRootAsync () {
 		return _GraphQLModule.forRootAsync({
-			useFactory: (configService:ConfigService) => configService.config.get('graphql'),
+			useFactory: (configService:ConfigService) => {
+				return {
+					context: ({ req }) => ({ req }),
+					...configService.config.get('graphql'),
+				};
+			},
 			inject: [ConfigService],
 		});
 	}
