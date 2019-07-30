@@ -18,7 +18,7 @@ export class AuthModule {
 					useFactory: (configService:ConfigService) => {
 						const cfg = configService.config.get('auth.jwt');
 						return {
-							secretOrPrivateKey: cfg.secretKey,
+							secret: cfg.secretKey,
 							signOptions: {
 								expiresIn: cfg.timeout,
 							},

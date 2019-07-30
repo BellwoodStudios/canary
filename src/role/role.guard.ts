@@ -17,10 +17,10 @@ export class RoleGuard extends AuthGuard('jwt') {
 	}
 
 	getRequest (context:ExecutionContext) {
-		try {
+		if (context.getArgs().length === 4) {
 			const ctx = GqlExecutionContext.create(context);
 			return ctx.getContext().req;
-		} catch (ex) {
+		} else {
 			return context.switchToHttp().getRequest();
 		}
 	}
