@@ -1,11 +1,11 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Field, ID, ObjectType } from 'type-graphql';
+import { Field, Int, ObjectType } from 'type-graphql';
 
 @ObjectType()
 export abstract class Model {
 
 	@PrimaryGeneratedColumn()
-	@Field(type => ID)
+	@Field(type => Int)
 	id:number;
 
 	@CreateDateColumn()
